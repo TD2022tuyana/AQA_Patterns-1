@@ -6,7 +6,7 @@ import lombok.Value;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.util.Random;
+
 
 public class DataGenerator {
 
@@ -33,10 +33,15 @@ public class DataGenerator {
 
 
     public static String generatePhone(String locale) {
-        Random rand = new Random();
-        String phone = "+7 " + rand.nextInt(1000000000);
-        return phone.substring(0, 11);
+        Faker faker = new Faker(new Locale(locale));
+        return faker.phoneNumber().phoneNumber();
     }
+
+    public static String generateInvalidPhone(String locale) {
+        Faker faker = new Faker(new Locale(locale));
+        return "+7 " + faker.random().nextInt(9999999);
+    }
+
 
     public static class Registration {
         private Registration() {
